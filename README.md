@@ -1,29 +1,98 @@
-# Pinocchio Vault 🏦
+# 🏦 Pinocchio Vault on Solana
 
-A simple vault smart contract demonstration on Solana using **Pinocchio**, inspired by the [Blueshift Pinocchio Vault Challenge](https://learn.blueshift.gg/en/challenges/pinocchio-vault).
+This project implements a simple **lamport vault** on Solana using [Pinocchio](https://learn.blueshift.gg/en/courses/introduction-to-pinocchio), a lightweight Solana-compatible framework.
 
-This program allows users to securely deposit and withdraw lamports using [Program Derived Addresses (PDAs)](https://docs.solana.com/developing/programming-model/calling-between-programs#program-derived-addresses-pdas) and Cross-Program Invocation (CPI). It is an educational project to get hands-on with account validation, instruction handling, and basic Solana DeFi building blocks in Rust.
+Users can securely **deposit** and **withdraw** lamports (Solana’s smallest denomination) into a vault derived from their public key using a Program Derived Address (PDA). Only the original depositor can withdraw the funds.
 
-> **Credits:**  
-> Much of the logic, structure, and explanation here is based on the [Blueshift Pinocchio Vault Challenge](https://learn.blueshift.gg/en/challenges/pinocchio-vault).  
-> Many thanks to the Blueshift team for this excellent resource!
+> 💡 Built as part of the [Blueshift Pinocchio Vault Challenge](https://learn.blueshift.gg/en/challenges/pinocchio-vault)
 
 ---
 
-## ✨ Features
+## 🔧 Features
 
-- **Deposit**: Users create a vault (PDA) and deposit lamports, protected by strict account checks.
-- **Withdraw**: Users can withdraw all lamports from their own vault, with the PDA signing for itself using seeds.
-- **Security**: Only the vault creator (owner) can deposit and withdraw. No double deposits or unauthorized withdrawal.
-- **CPI Usage**: Transfers leverage cross-program invocation to the System Program.
+- 📥 **Deposit** lamports into a vault securely  
+- 📤 **Withdraw** lamports back to the depositor  
+- 🛡️ Enforces PDA ownership and vault uniqueness  
+- 🔒 Rent-exempt checks for deposit safety  
+- 🧠 Demonstrates PDA signing and CPI (Cross-Program Invocation)
 
 ---
 
-## 🚀 Installation
+## 🛠️ Installation & Setup
 
-**Prerequisites:**
+Make sure you have [Rust](https://www.rust-lang.org/tools/install) and the Pinocchio toolchain installed.
 
-- [Rust](https://rustup.rs/)
-- [Pinocchio](https://github.com/blueshift-gg/pinocchio) (Solana-like on-chain framework)
+```bash
+# Create a new cargo workspace
+cargo new blueshift_vault --lib --edition 2021
+cd blueshift_vault
 
-**Setup:**
+# Add dependencies
+cargo add pinocchio pinocchio-system
+```
+
+Update your `Cargo.toml` to support dynamic libraries:
+
+```toml
+[lib]
+crate-type = ["lib", "cdylib"]
+```
+
+---
+
+## 📁 Project Structure
+
+All logic is implemented inside `lib.rs`, including:
+
+- **Vault PDA Derivation**  
+- **Deposit & Withdraw Instructions**  
+- **Account Validation & Ownership Checks**
+
+---
+
+## 📤 Deposit Flow
+
+- Validates the vault is empty (no double deposits)  
+- Checks that deposit amount is non-zero and rent-exempt  
+- Transfers lamports using a CPI to the system program  
+
+---
+
+## 📥 Withdraw Flow
+
+- Ensures the vault contains lamports  
+- Re-derives the PDA from the owner's pubkey  
+- Vault signs the transfer using PDA signing via `invoke_signed`  
+
+---
+
+## 🧪 Build
+
+To compile the program for Solana’s SBF (Sealevel BPF) format:
+
+```bash
+cargo build-sbf
+```
+
+This will generate a `.so` file in `target/deploy/`.
+
+---
+
+## 🏁 Taking the Challenge
+
+Once built, go to the [Pinocchio Vault Challenge page](https://learn.blueshift.gg/en/challenges/pinocchio-vault/verify) and upload your `.so` file to test it and claim your on-chain NFT.
+
+---
+
+## 🙏 Credits
+
+This project is based on the excellent guide by **[Blueshift](https://learn.blueshift.gg)**.  
+Special thanks to their educational challenge:  
+👉 [Pinocchio Vault Challenge](https://learn.blueshift.gg/en/challenges/pinocchio-vault)
+
+---
+
+## 📜 License
+
+MIT License © 2025  
+Built with ❤️ by [Your Name or GitHub handle]
