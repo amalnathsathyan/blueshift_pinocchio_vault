@@ -84,8 +84,12 @@ To deploy
 solana program deploy target/deploy/example_program.so --program-id ./target/deploy/example_program-keypair.json
 ```
 
-Deployed on devnet, signature:
-```2hoKMpqNnwAsokRfEKqg4rD7ufY9bpZf9sKYEDzam7uKN3NTZuLu9oWkurukSSvxYavdvWPY9ywyNvC3wvFLFf4```
+Deployed on devnet:
+
+```bash
+https://explorer.solana.com/tx/2hoKMpqNnwAsokRfEKqg4rD7ufY9bpZf9sKYEDzam7uKN3NTZuLu9oWkurukSSvxYavdvWPY9ywyNvC3wvFLFf4?cluster=devnet
+```
+
 ---
 
 ## 🏁 Taking the Challenge
