@@ -76,6 +76,16 @@ cargo build-sbf
 
 This will generate a `.so` file in `target/deploy/`.
 
+## 🧪 Deploy
+
+To deploy 
+
+```bash
+solana program deploy target/deploy/example_program.so --program-id ./target/deploy/example_program-keypair.json
+```
+
+Deployed on devnet, signature:
+```2hoKMpqNnwAsokRfEKqg4rD7ufY9bpZf9sKYEDzam7uKN3NTZuLu9oWkurukSSvxYavdvWPY9ywyNvC3wvFLFf4```
 ---
 
 ## 🏁 Taking the Challenge
