@@ -1,0 +1,1 @@
+/Users/amalnathsathyan/Documents/trycatchblock/learning/blueshift/blueshift_pinocchio_vault/target/sbf-solana-solana/release/blueshift_pinocchio_vault.so: /Users/amalnathsathyan/Documents/trycatchblock/learning/blueshift/blueshift_pinocchio_vault/src/lib.rs
